@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop all — SOLSKIN</title>
+<meta name="description" content="Four products and the tools to apply them. Every bundle listed once, with the saving measured against what the parts actually cost.">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/store.css">
+</head>
+<body>
+
+<header class="store-nav">
+  <div class="store-nav__in">
+    <a href="index.html" aria-label="SOLSKIN home"><img src="logo/solskin-wordmark-cream.svg" alt="SOLSKIN" width="118" height="36"></a>
+    <nav aria-label="Store">
+      <ul class="store-nav__links">
+        <li><a href="shop.html" aria-current="page" style="color:var(--bronze-lit)">Shop</a></li>
+        <li><a href="picker.html">Find your shade</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <h1>Shop all</h1>
+    <p>Four products and the tools to apply them. Every bundle appears <strong>once</strong>, under one name, and the saving is measured against what the parts actually cost.</p>
+  </div>
+
+  <div class="filters" role="group" aria-label="Filter products">
+    <button class="filter" data-f="all" aria-pressed="true">Everything</button>
+    <button class="filter" data-f="body" aria-pressed="false">Body</button>
+    <button class="filter" data-f="face" aria-pressed="false">Face</button>
+    <button class="filter" data-f="noTan" aria-pressed="false">No-tan glow</button>
+    <button class="filter" data-f="tools" aria-pressed="false">Tools</button>
+    <button class="filter" data-f="bundle" aria-pressed="false">Bundles</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <p aria-live="polite" id="count" style="color:var(--ivory-faint);font-size:.86rem;margin-top:2rem"></p>
+</main>
+
+<script src="js/catalogue.js"></script>
+<script>
+/* Collection page. ~1KB of logic: filter, render, announce.
+   Filter state lives in the URL so a filtered view is linkable. */
+(function () {
+  'use strict';
+  var grid = document.getElementById('grid');
+  var count = document.getElementById('count');
+
+  function cards() {
+    var out = [];
+    PRODUCTS.forEach(function (p) {
+      out.push({ cat: p.cat, html:
+        '<article class="card"><div class="card__img"><img src="' + p.img + '" alt="SOLSKIN ' + p.name +
+        '" loading="lazy" width="230" height="248"></div><div class="card__body">' +
+        '<h3>' + p.name + '</h3><span class="card__meta">' + p.size + '</span>' +
+        '<div class="shades">' + p.variants.map(function (v) {
+          return '<span class="shade-dot" style="background:' + SHADES[v.shade].hex + '" title="' + v.label + '"></span>';
+        }).join('') + '</div>' +
+        '<p class="card__blurb">' + p.blurb + '</p>' +
+        '<div class="card__foot"><span class="card__price">' + money(p.price) + '</span>' +
+        '<a class="btn btn--ghost" style="padding:8px 16px;font-size:.82rem" href="picker.html">Which shade?</a></div>' +
+        '</div></article>' });
+    });
+    TOOLS.forEach(function (t) {
+      out.push({ cat: t.cat, html:
+        '<article class="card"><div class="card__img" style="background:var(--charcoal-2)"></div><div class="card__body">' +
+        '<h3>' + t.name + '</h3><p class="card__blurb">Application matters more than the tan. This is why it goes on evenly.</p>' +
+        '<div class="card__foot"><span class="card__price">' + money(t.price) + '</span></div></div></article>' });
+    });
+    BUNDLES.forEach(function (b) {
+      var full = partsTotal(b), save = full - b.price;
+      out.push({ cat: ['bundle'], html:
+        '<article class="card"><div class="card__img"><img src="' + byId(b.base).img + '" alt="SOLSKIN ' + b.name +
+        '" loading="lazy" width="230" height="248"></div><div class="card__body">' +
+        '<h3>' + b.name + '</h3><span class="card__meta">' + b.parts.map(function (id) { return byId(id).name; }).join(' + ') + '</span>' +
+        '<p class="card__blurb">One listing, one price. The saving is against what these cost bought separately.</p>' +
+        '<div class="card__foot"><span class="card__price">' + money(b.price) +
+        ' <span class="card__was">' + money(full) + '</span></span>' +
+        '<span class="card__save">Save ' + money(save) + '</span></div></div></article>' });
+    });
+    return out;
+  }
+
+  var ALL = cards();
+
+  function render(f) {
+    var list = f === 'all' ? ALL : ALL.filter(function (c) { return c.cat.indexOf(f) !== -1; });
+    grid.innerHTML = list.length ? list.map(function (c) { return c.html; }).join('')
+                                 : '<p class="empty">Nothing in that group yet.</p>';
+    count.textContent = list.length + (list.length === 1 ? ' product' : ' products');
+    document.querySelectorAll('.filter').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.f === f));
+    });
+  }
+
+  document.querySelector('.filters').addEventListener('click', function (e) {
+    var b = e.target.closest('.filter');
+    if (!b) return;
+    history.replaceState(null, '', b.dataset.f === 'all' ? location.pathname : '#' + b.dataset.f);
+    render(b.dataset.f);
+  });
+
+  render((location.hash.replace('#', '') || 'all'));
+})();
+</script>
+</body>
+</html>

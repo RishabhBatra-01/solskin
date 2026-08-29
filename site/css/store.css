@@ -1,0 +1,141 @@
+/* ============================================================
+   SOLSKIN — store surfaces (collection + product picker)
+   Deliberately light: no WebGL, no libraries, no webfont beyond
+   the two the brand already loads. Performance is the brief.
+   ============================================================ */
+
+.store-nav{
+  position:sticky;top:0;z-index:60;background:rgba(14,11,10,.88);
+  backdrop-filter:saturate(150%) blur(14px);border-bottom:1px solid var(--rule-soft);
+}
+.store-nav__in{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);height:70px;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.store-nav__in img{width:118px;height:auto;display:block}
+.store-nav a{color:var(--ivory-soft);text-decoration:none;font-size:.9rem}
+.store-nav a:hover{color:var(--bronze-lit)}
+.store-nav__links{display:flex;gap:1.4rem;list-style:none;margin:0;padding:0}
+@media(max-width:640px){.store-nav__links{gap:1rem;font-size:.85rem}}
+
+.page-head{padding:clamp(2.5rem,6vw,4.5rem) 0 clamp(1.5rem,3vw,2.5rem)}
+.page-head h1{font-size:clamp(2.2rem,6vw,4.2rem);line-height:.95;margin-bottom:.8rem}
+.page-head p{color:var(--ivory-soft);max-width:52ch}
+
+/* ---------- filters ---------- */
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;margin:2rem 0 2.4rem;
+  padding-bottom:1.6rem;border-bottom:1px solid var(--rule-soft)}
+.filter{
+  font:500 .88rem/1 var(--body);color:var(--ivory-soft);
+  background:var(--charcoal);border:1px solid var(--rule);
+  padding:.62rem 1.1rem;border-radius:var(--pill);cursor:pointer;
+  transition:background-color .16s,color .16s,border-color .16s;
+}
+.filter:hover{border-color:rgba(201,138,75,.5);color:var(--ivory)}
+.filter[aria-pressed="true"]{background:var(--bronze);border-color:var(--bronze);color:#150F0A}
+.filter:focus-visible{outline:2.5px solid var(--bronze-lit);outline-offset:3px}
+
+/* ---------- grid ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.1rem}
+.card{
+  background:var(--charcoal);border:1px solid var(--rule-soft);border-radius:var(--card);
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .2s cubic-bezier(.2,.7,.3,1),border-color .2s;
+}
+.card:hover{transform:translateY(-4px);border-color:rgba(201,138,75,.4)}
+.card__img{background:var(--ivory);aspect-ratio:1/1.08;display:grid;place-items:center;overflow:hidden}
+.card__img img{width:100%;height:100%;object-fit:contain;display:block}
+.card__body{padding:1.1rem 1.15rem 1.3rem;display:flex;flex-direction:column;gap:.35rem;flex:1}
+.card h3{font-size:1.02rem;color:var(--ivory)}
+.card__meta{font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ivory-faint)}
+.card__blurb{font-size:.88rem;color:var(--ivory-soft);margin:.35rem 0 .8rem;flex:1}
+.card__foot{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem}
+.card__price{font-family:var(--display);font-size:1.22rem;color:var(--bronze-lit)}
+.card__was{font-size:.78rem;color:var(--ivory-faint);text-decoration:line-through}
+.card__save{font-size:.72rem;color:var(--bronze-lit);letter-spacing:.08em;text-transform:uppercase}
+
+/* shade dots */
+.shades{display:flex;gap:.34rem;align-items:center;margin-top:.2rem}
+.shade-dot{width:15px;height:15px;border-radius:999px;border:1px solid rgba(255,255,255,.28);display:block}
+
+.empty{color:var(--ivory-faint);padding:3rem 0;text-align:center;grid-column:1/-1}
+
+/* ============================================================
+   PRODUCT PICKER
+   ============================================================ */
+.picker{max-width:760px;margin:0 auto;padding-bottom:5rem}
+.picker__bar{height:3px;background:rgba(242,235,225,.14);border-radius:999px;overflow:hidden;margin-bottom:2.2rem}
+.picker__bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--bronze),var(--bronze-lit));
+  border-radius:999px;transition:width .32s cubic-bezier(.2,.7,.3,1)}
+
+.step{display:none}
+.step[data-active]{display:block;animation:stepIn .34s cubic-bezier(.2,.7,.3,1) both}
+@keyframes stepIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.step[data-active]{animation:none}}
+
+.step__n{font:500 .72rem/1 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);margin-bottom:.9rem}
+.step h2{font-size:clamp(1.6rem,4vw,2.6rem);margin-bottom:.6rem}
+.step p.hint{color:var(--ivory-soft);margin-bottom:1.8rem;font-size:.98rem}
+
+.opts{display:grid;gap:.7rem}
+.opts--tones{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}
+.opt{
+  display:flex;align-items:center;gap:.9rem;width:100%;text-align:left;
+  background:var(--charcoal);border:1.5px solid var(--rule);border-radius:18px;
+  padding:1.05rem 1.2rem;cursor:pointer;color:var(--ivory);
+  font:500 1rem/1.3 var(--body);
+  transition:border-color .16s,background-color .16s,transform .16s;
+}
+.opt:hover{border-color:rgba(201,138,75,.6);transform:translateX(3px)}
+.opt:focus-visible{outline:2.5px solid var(--bronze-lit);outline-offset:3px}
+.opt[aria-pressed="true"]{border-color:var(--bronze);background:rgba(201,138,75,.14)}
+.opt small{display:block;font-weight:400;font-size:.85rem;color:var(--ivory-soft);margin-top:.2rem}
+.opts--tones .opt{flex-direction:column;text-align:center;gap:.6rem;padding:1.2rem .8rem}
+.opt__tone{width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.3)}
+.opt__hit{flex:1}
+
+.picker__back{
+  margin-top:1.6rem;background:none;border:0;color:var(--ivory-faint);
+  font:500 .88rem var(--body);cursor:pointer;padding:.4rem 0;
+}
+.picker__back:hover{color:var(--bronze-lit)}
+.picker__back:focus-visible{outline:2.5px solid var(--bronze-lit);outline-offset:3px;border-radius:4px}
+
+/* ---------- result ---------- */
+.result{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(1.4rem,4vw,2.6rem);align-items:start}
+@media(max-width:700px){.result{grid-template-columns:1fr}}
+.result__img{background:var(--ivory);border-radius:var(--card);overflow:hidden;aspect-ratio:1/1.08;display:grid;place-items:center}
+.result__img img{width:100%;height:100%;object-fit:contain}
+.result__why{
+  background:rgba(201,138,75,.12);border:1px solid rgba(201,138,75,.32);
+  border-radius:16px;padding:.9rem 1.1rem;font-size:.92rem;color:var(--ivory);margin:1rem 0 1.4rem;
+}
+.result h2{font-size:clamp(1.7rem,4vw,2.5rem);margin-bottom:.4rem}
+.result__size{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ivory-faint)}
+
+.chooser{margin:1.4rem 0}
+.chooser__label{font:500 .74rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--ivory-faint);margin-bottom:.7rem}
+.swatches{display:flex;flex-wrap:wrap;gap:.6rem}
+.swatch{
+  display:flex;align-items:center;gap:.6rem;background:var(--charcoal);
+  border:1.5px solid var(--rule);border-radius:var(--pill);padding:.5rem .95rem .5rem .5rem;
+  cursor:pointer;color:var(--ivory);font:500 .9rem var(--body);
+}
+.swatch i{width:24px;height:24px;border-radius:999px;border:1px solid rgba(255,255,255,.3);display:block}
+.swatch[aria-pressed="true"]{border-color:var(--bronze);background:rgba(201,138,75,.16)}
+.swatch:focus-visible{outline:2.5px solid var(--bronze-lit);outline-offset:3px}
+
+.buys{display:grid;gap:.6rem;margin:1.3rem 0}
+.buy{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  background:var(--charcoal);border:1.5px solid var(--rule);border-radius:16px;
+  padding:.95rem 1.1rem;cursor:pointer;color:var(--ivory);text-align:left;
+  font:500 .96rem var(--body);
+}
+.buy[aria-pressed="true"]{border-color:var(--bronze);background:rgba(201,138,75,.14)}
+.buy:focus-visible{outline:2.5px solid var(--bronze-lit);outline-offset:3px}
+.buy small{display:block;font-weight:400;font-size:.83rem;color:var(--ivory-soft);margin-top:.15rem}
+.buy b{font-family:var(--display);font-size:1.15rem;color:var(--bronze-lit);white-space:nowrap}
+.buy .tag{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze-lit);display:block}
+
+.addbar{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:1.4rem}
+.addbar .total{font-family:var(--display);font-size:1.7rem;color:var(--ivory)}
+.addbar .total s{font-family:var(--body);font-size:.85rem;color:var(--ivory-faint);margin-left:.5rem}

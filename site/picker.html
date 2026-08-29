@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Find your shade — SOLSKIN</title>
+<meta name="description" content="Three questions and we'll point you at one product and one shade. Not the whole shelf.">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/store.css">
+</head>
+<body>
+
+<header class="store-nav">
+  <div class="store-nav__in">
+    <a href="index.html" aria-label="SOLSKIN home"><img src="logo/solskin-wordmark-cream.svg" alt="SOLSKIN" width="118" height="36"></a>
+    <nav aria-label="Store">
+      <ul class="store-nav__links">
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="picker.html" aria-current="page" style="color:var(--bronze-lit)">Find your shade</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap picker">
+
+  <div class="page-head">
+    <h1>Find your shade</h1>
+    <p>Three questions. We'll point you at <strong>one product and one shade</strong> — not the whole shelf.</p>
+  </div>
+
+  <div class="picker__bar" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0">
+    <i id="bar"></i>
+  </div>
+
+  <!-- Q1 -->
+  <section class="step" data-step="0" data-active aria-labelledby="q1">
+    <p class="step__n">Question 1 of 3</p>
+    <h2 id="q1">How does your skin look right now?</h2>
+    <p class="hint">Before any tan. Pick whichever is closest — you can change it after.</p>
+    <div class="opts opts--tones" role="group" aria-labelledby="q1" id="q1opts"></div>
+  </section>
+
+  <!-- Q2 -->
+  <section class="step" data-step="1" aria-labelledby="q2">
+    <p class="step__n">Question 2 of 3</p>
+    <h2 id="q2">How far do you want to go?</h2>
+    <p class="hint">There's no wrong answer. You can always build up.</p>
+    <div class="opts" role="group" aria-labelledby="q2">
+      <button class="opt" data-q="depth" data-v="subtle"><span class="opt__hit">Just a bit of colour<small>Like you've had a good week. Nobody asks.</small></span></button>
+      <button class="opt" data-q="depth" data-v="noticeable"><span class="opt__hit">A proper tan<small>Obvious you're glowing, still looks like you.</small></span></button>
+      <button class="opt" data-q="depth" data-v="deep"><span class="opt__hit">Deep bronze<small>Holiday skin. No apologies.</small></span></button>
+    </div>
+    <button class="picker__back" type="button">← Back</button>
+  </section>
+
+  <!-- Q3 -->
+  <section class="step" data-step="2" aria-labelledby="q3">
+    <p class="step__n">Question 3 of 3</p>
+    <h2 id="q3">When do you need it?</h2>
+    <p class="hint">This is usually what decides the product.</p>
+    <div class="opts" role="group" aria-labelledby="q3">
+      <button class="opt" data-q="speed" data-v="tonight"><span class="opt__hit">Tonight<small>Out in a couple of hours.</small></span></button>
+      <button class="opt" data-q="speed" data-v="overnight"><span class="opt__hit">Tomorrow<small>Happy to let it develop while I sleep.</small></span></button>
+      <button class="opt" data-q="speed" data-v="slow"><span class="opt__hit">No rush<small>I'd rather build it up slowly and stay in control.</small></span></button>
+    </div>
+    <button class="picker__back" type="button">← Back</button>
+  </section>
+
+  <!-- Result -->
+  <section class="step" data-step="3" aria-labelledby="rname">
+    <p class="step__n">Your match</p>
+    <div class="result">
+      <div class="result__img"><img id="rimg" src="" alt="" width="460" height="497"></div>
+      <div>
+        <h2 id="rname"></h2>
+        <p class="result__size" id="rsize"></p>
+        <p class="result__why" id="rwhy"></p>
+
+        <div class="chooser" id="shadeWrap">
+          <p class="chooser__label">Shade</p>
+          <div class="swatches" id="rshades" role="group" aria-label="Shade"></div>
+        </div>
+
+        <div class="chooser">
+          <p class="chooser__label">How you'd like it</p>
+          <div class="buys" id="rbuys" role="group" aria-label="Purchase option"></div>
+        </div>
+
+        <div class="addbar">
+          <span class="total" id="rtotal"></span>
+          <a class="btn btn--primary" href="#" id="radd">Add to bag</a>
+        </div>
+        <button class="picker__back" type="button">← Start again</button>
+      </div>
+    </div>
+  </section>
+
+  <p aria-live="polite" class="visually-hidden" id="live" style="position:absolute;left:-9999px"></p>
+</main>
+
+<script src="js/catalogue.js"></script>
+<script src="js/picker.js"></script>
+</body>
+</html>
