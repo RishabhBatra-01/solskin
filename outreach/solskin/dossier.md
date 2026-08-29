@@ -59,9 +59,19 @@ it is explicitly framed and measured.
 - **Channel: LinkedIn DM, not email.** He asked for a DM. Doing what he asked is itself
   a signal. Email is the fallback / follow-up.
 - **Angle: built-it (angles.md #2)**, narrowed. The artifact is the email.
-- **The gap:** he asked for three things — homepage, collection page, product picker.
-  We have built one (homepage). The product picker is the one he named as the portfolio
-  differentiator and it is the one we do not have.
+- **All three artefacts now exist:**
+  - homepage — https://solskin.vercel.app
+  - collection — https://solskin.vercel.app/shop.html
+  - product picker — https://solskin.vercel.app/picker.html
+- **The performance answer.** He said performance is a design decision. Measured first
+  load: picker ~170 KB, collection ~191 KB, homepage ~3.5 MB (652 KB of that is Three.js).
+  The contrast is the argument — the homepage shows range, the store pages show restraint.
+  Lead with the picker, not the homepage.
+- **The strongest single fact to open with:** the same SKU is sold twice on his own store
+  at the same price with two different RRPs and two different discounts
+  (SOL_GMD200_D25: -33% as "Glow Starter Kit", -10% as "Gradual Tanning Moisturiser &
+  Tan Drops"). Specific, checkable in 30 seconds, and it is exactly the problem a picker
+  solves. It is also a bug report, which outranks "please hire me" as an angle.
 
 ## Calls
 - **Tier:** deferred — cannot score without the CV. See intake gap.
@@ -73,7 +83,7 @@ it is explicitly framed and measured.
    returns 404 on https://solskin.vercel.app — the font is gitignored because the repo
    is public. Headings render in a fallback. Sending a brand revamp that is not in the
    brand's own font to that brand's co-founder is a self-inflicted wound.
-2. **No product picker exists.** It is the artefact he explicitly named.
+2. ~~No product picker exists.~~ Built and deployed.
 
 ## Risk to weigh
 The public repo https://github.com/RishabhBatra-01/solskin contains `context/`, which
