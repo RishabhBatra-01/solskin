@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shop all — SOLSKIN</title>
 <meta name="description" content="Four products and the tools to apply them. Every bundle listed once, with the saving measured against what the parts actually cost.">
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/store.css">
+<link rel="stylesheet" href="css/styles.css?v=1788000725638">
+<link rel="stylesheet" href="css/store.css?v=1788000725638">
 </head>
 <body>
 
@@ -54,7 +54,7 @@
   <p aria-live="polite" id="count" style="color:var(--ivory-faint);font-size:.86rem;margin-top:2rem"></p>
 </main>
 
-<script src="js/catalogue.js"></script>
+<script src="js/catalogue.js?v=1788000725638"></script>
 <script>
 /* Collection page. ~1KB of logic: filter, render, announce.
    Filter state lives in the URL so a filtered view is linkable. */
@@ -67,11 +67,14 @@
     var out = [];
     PRODUCTS.forEach(function (p) {
       out.push({ cat: p.cat, depth: p.depth, html:
-        '<article class="card"><div class="card__img"><img src="' + p.img + '" alt="SOLSKIN ' + p.name +
+        '<article class="card" style="--shade:' + SHADES[p.variants[0].shade].hex + '">' +
+        '<div class="card__img"><span class="card__tilt"></span><img src="' + p.img + '" alt="SOLSKIN ' + p.name +
         '" loading="lazy" width="230" height="248"></div><div class="card__body">' +
         '<h3>' + p.name + '</h3><span class="card__meta">' + p.size + '</span>' +
         '<div class="shades">' + p.variants.map(function (v) {
-          return '<span class="shade-dot" style="background:' + SHADES[v.shade].hex + '" title="' + v.label + '"></span>';
+          return '<button class="shade-chip" type="button" data-shade="' + SHADES[v.shade].hex +
+                 '" title="' + v.label + '"><i class="shade-dot" style="background:' + SHADES[v.shade].hex +
+                 '"></i><span>' + v.label + '</span></button>';
         }).join('') + '</div>' +
         '<p class="card__blurb">' + p.blurb + '</p>' +
         '<div class="card__foot"><span class="card__price">' + money(p.price) + '</span>' +
@@ -87,7 +90,8 @@
     BUNDLES.forEach(function (b) {
       var full = partsTotal(b), save = full - b.price;
       out.push({ cat: ['bundle'], html:
-        '<article class="card"><div class="card__img"><img src="' + byId(b.base).img + '" alt="SOLSKIN ' + b.name +
+        '<article class="card" style="--shade:' + SHADES[byId(b.base).variants[0].shade].hex + '">' +
+        '<div class="card__img"><span class="card__tilt"></span><img src="' + byId(b.base).img + '" alt="SOLSKIN ' + b.name +
         '" loading="lazy" width="230" height="248"></div><div class="card__body">' +
         '<h3>' + b.name + '</h3><span class="card__meta">' + b.parts.map(function (id) { return byId(id).name; }).join(' + ') + '</span>' +
         '<p class="card__blurb">One listing, one price. The saving is against what these cost bought separately.</p>' +
@@ -133,6 +137,39 @@
     history.replaceState(null, '', b.dataset.f === 'all' ? location.pathname : '#' + b.dataset.f);
     current = b.dataset.f;
     render(current);
+  });
+
+  /* Tilt: a few degrees following the cursor. Sets two custom properties
+     and nothing else — no layout, no repaint, composited on the GPU.
+     Skipped entirely on touch and under reduced motion. */
+  var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (fine && !still) {
+    grid.addEventListener('pointermove', function (e) {
+      var card = e.target.closest('.card');
+      if (!card) return;
+      var t = card.querySelector('.card__tilt');
+      if (!t) return;
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      t.style.setProperty('--ry', (x * 9).toFixed(2) + 'deg');
+      t.style.setProperty('--rx', (-y * 6).toFixed(2) + 'deg');
+      card.querySelector('.card__img').style.setProperty('--tiltx', x);
+    });
+    grid.addEventListener('pointerleave', function () {
+      grid.querySelectorAll('.card__tilt').forEach(function (t) {
+        t.style.setProperty('--ry', '0deg'); t.style.setProperty('--rx', '0deg');
+      });
+    }, true);
+  }
+
+  /* hovering a specific shade chip previews THAT shade on the plinth */
+  grid.addEventListener('pointerover', function (e) {
+    var chip = e.target.closest('.shade-chip');
+    if (!chip) return;
+    chip.closest('.card').style.setProperty('--shade', chip.dataset.shade);
   });
 
   var current = location.hash.replace('#', '') || 'all';
