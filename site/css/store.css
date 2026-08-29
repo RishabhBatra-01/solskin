@@ -139,3 +139,122 @@
 .addbar{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:1.4rem}
 .addbar .total{font-family:var(--display);font-size:1.7rem;color:var(--ivory)}
 .addbar .total s{font-family:var(--body);font-size:.85rem;color:var(--ivory-faint);margin-left:.5rem}
+
+/* ============================================================
+   PREMIUM PASS
+   The hard white product tile was the weakest thing on these
+   pages: a bright rectangle on near-black reads as a marketplace
+   listing. The pack shots have a near-white background baked in,
+   and a flood-fill knockout eats the white pump caps — so instead
+   the product sits on a warm ivory plinth and blends into it with
+   multiply. The background disappears; the cap stays white.
+   ============================================================ */
+
+.card__img,
+.result__img{
+  /* keep the range TIGHT. multiply darkens the product by whatever the
+     plinth is, so a plinth that falls to #EADCC9 tints the bottle muddy.
+     #FFF -> #F4EEE6 is ~4%: enough to swallow the near-white pack-shot
+     background, not enough to touch the product. */
+  background:
+    radial-gradient(115% 95% at 50% 22%, #FFFFFF 0%, #FAF6F1 55%, #F4EEE6 100%);
+  position:relative;
+  isolation:isolate;
+}
+.card__img img,
+.result__img img{ mix-blend-mode:multiply; }
+
+/* a contact shadow so the bottle sits on the plinth rather than floating */
+.card__img::before,
+.result__img::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  box-shadow:inset 0 0 40px rgba(120,84,52,.10), inset 0 -18px 30px rgba(120,84,52,.07);
+}
+.card__img::after,
+.result__img::after{
+  content:"";position:absolute;left:50%;bottom:9%;transform:translateX(-50%);
+  width:52%;height:7%;border-radius:50%;
+  background:radial-gradient(50% 50% at 50% 50%, rgba(90,53,32,.30), rgba(90,53,32,0) 70%);
+  z-index:-1;pointer-events:none;
+}
+
+/* warm light spilling off the plinth onto the dark card */
+.card{position:relative;overflow:hidden}
+.card::before{
+  content:"";position:absolute;inset:-1px -1px auto;height:58%;
+  background:radial-gradient(90% 100% at 50% 0%, rgba(201,138,75,.16), rgba(201,138,75,0) 70%);
+  opacity:0;transition:opacity .3s ease;pointer-events:none;z-index:1;
+}
+.card:hover::before{opacity:1}
+.card:hover{box-shadow:0 22px 50px rgba(0,0,0,.5)}
+.card__body{position:relative;z-index:2}
+
+/* type: let the display face carry the product name */
+.card h3{
+  font-family:var(--display);text-transform:uppercase;
+  font-size:1.12rem;line-height:1.04;letter-spacing:.01em;
+}
+.card__price{font-size:1.34rem}
+
+/* ---------- entrance: a considered stagger, not a bounce ---------- */
+@keyframes riseCard{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.grid .card{animation:riseCard .62s cubic-bezier(.2,.75,.3,1) both}
+.grid .card:nth-child(1){animation-delay:.02s}
+.grid .card:nth-child(2){animation-delay:.07s}
+.grid .card:nth-child(3){animation-delay:.12s}
+.grid .card:nth-child(4){animation-delay:.17s}
+.grid .card:nth-child(5){animation-delay:.22s}
+.grid .card:nth-child(6){animation-delay:.27s}
+.grid .card:nth-child(n+7){animation-delay:.32s}
+@media(prefers-reduced-motion:reduce){.grid .card{animation:none}}
+
+/* ---------- shade chips with real depth ---------- */
+.shade-dot{
+  width:17px;height:17px;
+  box-shadow:inset 0 -2px 3px rgba(0,0,0,.28), inset 0 2px 2px rgba(255,255,255,.35);
+  border-color:rgba(255,255,255,.22);
+}
+.swatch i{
+  width:26px;height:26px;
+  box-shadow:inset 0 -3px 4px rgba(0,0,0,.3), inset 0 2px 3px rgba(255,255,255,.4);
+}
+.swatch{transition:border-color .18s,background-color .18s,transform .18s}
+.swatch:hover{transform:translateY(-1px)}
+
+/* ---------- the picker result deserves a beat ---------- */
+@keyframes revealProduct{
+  from{opacity:0;transform:scale(.94) translateY(14px)}
+  to{opacity:1;transform:none}
+}
+@keyframes revealCopy{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.step[data-step="3"][data-active] .result__img{
+  animation:revealProduct .8s cubic-bezier(.2,.75,.3,1) both;
+}
+.step[data-step="3"][data-active] .result > div > *{
+  animation:revealCopy .6s cubic-bezier(.2,.75,.3,1) both;
+}
+.step[data-step="3"][data-active] .result > div > *:nth-child(1){animation-delay:.10s}
+.step[data-step="3"][data-active] .result > div > *:nth-child(2){animation-delay:.16s}
+.step[data-step="3"][data-active] .result > div > *:nth-child(3){animation-delay:.22s}
+.step[data-step="3"][data-active] .result > div > *:nth-child(4){animation-delay:.28s}
+.step[data-step="3"][data-active] .result > div > *:nth-child(5){animation-delay:.34s}
+.step[data-step="3"][data-active] .result > div > *:nth-child(6){animation-delay:.40s}
+@media(prefers-reduced-motion:reduce){
+  .step[data-step="3"][data-active] .result__img,
+  .step[data-step="3"][data-active] .result > div > *{animation:none}
+}
+
+/* the glow behind the matched product */
+.result__img{box-shadow:0 30px 70px rgba(0,0,0,.55), 0 0 60px rgba(201,138,75,.14)}
+
+/* ---------- page head: more editorial ---------- */
+.page-head{position:relative}
+.page-head::after{
+  content:"";display:block;width:64px;height:2px;margin-top:1.6rem;
+  background:linear-gradient(90deg,var(--bronze),transparent);
+}
+.page-head h1{letter-spacing:-.005em}
+
+/* ---------- filters: quieter until touched ---------- */
+.filter{background:transparent;border-color:var(--rule-soft)}
+.filter:hover{background:var(--charcoal)}
