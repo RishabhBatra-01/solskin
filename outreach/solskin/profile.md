@@ -1,9 +1,16 @@
 # Profile — verified claims only
 
-## ⚠️ No CV supplied
-The user has not provided a resume. **Nothing about their background, employment,
-years of experience or past clients may appear in any message.** The DM below is
-deliberately artefact-only for this reason.
+## ⚠️ Still no CV
+No resume supplied. The user has stated the following about themselves, and only
+these may be used:
+- Software developer; builds products end to end
+- Most of what they build has AI at its core; portfolio shows AI applications with demos
+- Portfolio: rishabhkbatra.is-a.dev
+- GitHub: https://github.com/RishabhBatra-01
+- LinkedIn: https://www.linkedin.com/in/rishabhkbatra/
+
+**Still not claimable:** years of experience, employers, clients, any D2C/Shopify
+/ecommerce history, any metric from past work.
 
 ## What is verifiably true (built in this session, live, inspectable)
 - Built a homepage, collection page and product picker for SOLSKIN, unsolicited,
