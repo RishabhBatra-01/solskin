@@ -10,6 +10,9 @@
 </head>
 <body>
 
+<!-- the ground tans as you choose — see "THE PAGE DEVELOPS" in store.css -->
+<div class="develop" aria-hidden="true"></div>
+
 <header class="store-nav">
   <div class="store-nav__in">
     <a href="index.html" aria-label="SOLSKIN home"><img src="logo/solskin-wordmark-cream.svg" alt="SOLSKIN" width="118" height="36"></a>
@@ -26,6 +29,16 @@
   <div class="page-head">
     <h1>Shop all</h1>
     <p>Four products and the tools to apply them. Every bundle appears <strong>once</strong>, under one name, and the saving is measured against what the parts actually cost.</p>
+  </div>
+
+  <div class="rail">
+    <p class="rail__label" id="raillbl">How far do you want to go?</p>
+    <div class="rail__track" role="group" aria-labelledby="raillbl">
+      <button class="rail__step" data-d="subtle"     aria-pressed="false"><i style="background:#DDB68F"></i><span>Just a bit<small>A good week, nothing more</small></span></button>
+      <button class="rail__step" data-d="noticeable" aria-pressed="false"><i style="background:#C89A6B"></i><span>A proper tan<small>Obvious, still you</small></span></button>
+      <button class="rail__step" data-d="deep"       aria-pressed="false"><i style="background:#8A5A34"></i><span>Deep bronze<small>Holiday skin</small></span></button>
+      <button class="rail__step" data-d="any"        aria-pressed="true"><i style="background:linear-gradient(135deg,#DDB68F,#8A5A34)"></i><span>Show me everything<small>All four</small></span></button>
+    </div>
   </div>
 
   <div class="filters" role="group" aria-label="Filter products">
@@ -53,7 +66,7 @@
   function cards() {
     var out = [];
     PRODUCTS.forEach(function (p) {
-      out.push({ cat: p.cat, html:
+      out.push({ cat: p.cat, depth: p.depth, html:
         '<article class="card"><div class="card__img"><img src="' + p.img + '" alt="SOLSKIN ' + p.name +
         '" loading="lazy" width="230" height="248"></div><div class="card__body">' +
         '<h3>' + p.name + '</h3><span class="card__meta">' + p.size + '</span>' +
@@ -86,9 +99,11 @@
   }
 
   var ALL = cards();
+  var depth = 'any';
 
   function render(f) {
     var list = f === 'all' ? ALL : ALL.filter(function (c) { return c.cat.indexOf(f) !== -1; });
+    if (depth !== 'any') list = list.filter(function (c) { return !c.depth || c.depth.indexOf(depth) !== -1; });
     grid.innerHTML = list.length ? list.map(function (c) { return c.html; }).join('')
                                  : '<p class="empty">Nothing in that group yet.</p>';
     count.textContent = list.length + (list.length === 1 ? ' product' : ' products');
@@ -97,14 +112,32 @@
     });
   }
 
+  /* the depth rail also tans the page — the ground deepens with the
+     choice, which is the one thing here that only works for this brand */
+  document.querySelector('.rail__track').addEventListener('click', function (e) {
+    var b = e.target.closest('.rail__step');
+    if (!b) return;
+    depth = b.dataset.d;
+    document.querySelectorAll('.rail__step').forEach(function (x) {
+      x.setAttribute('aria-pressed', String(x.dataset.d === depth));
+    });
+    var r = document.documentElement;
+    if (depth === 'any') { r.removeAttribute('data-depth'); r.setAttribute('data-develop', '1'); }
+    else { r.setAttribute('data-depth', depth); r.removeAttribute('data-develop'); }
+    render(current);
+  });
+
   document.querySelector('.filters').addEventListener('click', function (e) {
     var b = e.target.closest('.filter');
     if (!b) return;
     history.replaceState(null, '', b.dataset.f === 'all' ? location.pathname : '#' + b.dataset.f);
-    render(b.dataset.f);
+    current = b.dataset.f;
+    render(current);
   });
 
-  render((location.hash.replace('#', '') || 'all'));
+  var current = location.hash.replace('#', '') || 'all';
+  document.documentElement.setAttribute('data-develop', '1');
+  render(current);
 })();
 </script>
 </body>

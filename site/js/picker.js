@@ -195,7 +195,19 @@
     }
   });
 
+  /* The page tans as the answers come in. Progress deepens the wash;
+     the chosen depth decides where it lands. Purely ambient — it sits
+     behind the content and never touches text contrast. */
+  function develop() {
+    var answered = ['tone', 'depth', 'speed'].filter(function (k) { return answers[k]; }).length;
+    var r = document.documentElement;
+    r.setAttribute('data-develop', String(answered));
+    if (answers.depth) r.setAttribute('data-depth', answers.depth);
+    else r.removeAttribute('data-depth');
+  }
+
   function route() {
+    develop();
     var i = stepFor();
     // reflect current answers on the buttons
     document.querySelectorAll('.opt').forEach(function (b) {
