@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" width="960" height="420" role="img" aria-label="SOLSKIN colour palette reference sheet">
+  <rect width="960" height="420" fill="#F6F0EB"/>
+  <text x="48" y="62" font-family="Arial Narrow, Impact, sans-serif" font-size="34" letter-spacing="1" fill="#32201A">SOLSKIN PALETTE</text>
+  <text x="48" y="88" font-family="DM Sans, Helvetica, sans-serif" font-size="13" fill="#885946">The brand is coloured in its own product&#8217;s shade ladder</text>
+
+  <g>
+    <rect x="48"  y="120" width="168" height="150" rx="24" fill="#F6F0EB" stroke="#32201A" stroke-opacity=".14"/>
+    <rect x="240" y="120" width="168" height="150" rx="24" fill="#EDD8C5"/>
+    <rect x="432" y="120" width="168" height="150" rx="24" fill="#885946"/>
+    <rect x="624" y="120" width="168" height="150" rx="24" fill="#32201A"/>
+    <rect x="816" y="120" width="96"  height="150" rx="24" fill="#C4A0A0"/>
+  </g>
+
+  <g font-family="DM Sans, Helvetica, sans-serif" fill="#32201A">
+    <text x="48"  y="298" font-size="15" font-weight="700">Cream</text>
+    <text x="240" y="298" font-size="15" font-weight="700">Sand</text>
+    <text x="432" y="298" font-size="15" font-weight="700">Brown</text>
+    <text x="624" y="298" font-size="15" font-weight="700">Espresso</text>
+    <text x="816" y="298" font-size="15" font-weight="700">Rose</text>
+  </g>
+  <g font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#885946">
+    <text x="48"  y="320">#F6F0EB</text>
+    <text x="240" y="320">#EDD8C5</text>
+    <text x="432" y="320">#885946</text>
+    <text x="624" y="320">#32201A</text>
+    <text x="816" y="320">~#C4A0A0</text>
+  </g>
+  <g font-family="DM Sans, Helvetica, sans-serif" font-size="12" fill="#885946">
+    <text x="48"  y="342">page canvas</text><text x="48"  y="360">&#8220;untanned&#8221;</text>
+    <text x="240" y="342">bands, footer</text><text x="240" y="360">&#8220;gradual&#8221;</text>
+    <text x="432" y="342">text, logo, CTA</text><text x="432" y="360">&#8220;dark&#8221;</text>
+    <text x="624" y="342">dark UI, bars</text><text x="624" y="360">&#8220;very dark&#8221;</text>
+    <text x="816" y="342">press cards</text><text x="816" y="360">approximate</text>
+  </g>
+
+  <line x1="48" y1="386" x2="912" y2="386" stroke="#32201A" stroke-opacity=".12"/>
+  <text x="48" y="408" font-family="DM Sans, Helvetica, sans-serif" font-size="11.5" fill="#9C8378">Read from live CSS 29 Aug 2026. Duplicates to retire: #F4F0EB (second cream), #805B4A (second brown, from third-party widgets).</text>
+</svg>

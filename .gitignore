@@ -1,0 +1,19 @@
+# ---------------------------------------------------------------
+# Vanguard CF is a COMMERCIAL typeface (Connary Fagen).
+# It is deliberately NOT committed: this is a public repository, and
+# publishing the font files here would redistribute a paid product to
+# anyone who clones it.
+#
+# The site still runs without them — the display face falls back to a
+# condensed system font. To restore the real thing, drop your licensed
+# copies at:
+#     assets/fonts/VanguardCF-Bold.otf
+#     assets/fonts/VanguardCF-Bold.woff
+#     site/fonts/VanguardCF-Bold.woff
+# See FONTS.md.
+# ---------------------------------------------------------------
+VanguardCF-Bold.otf
+VanguardCF-Bold.woff
+
+# macOS
+.DS_Store

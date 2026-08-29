@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOLSKIN — Tan That Likes Your Skin Back</title>
+<meta name="description" content="The UK's self-tan made for sensitive skin. Streak-free, transfer-free, dermatologically tested, vegan and made in Britain. Founded by two women whose own skin reacted to everything else.">
+<link rel="stylesheet" href="css/styles.css?v=1787995096446">
+</head>
+<body>
+
+<!-- ============================================================
+     ANNOUNCEMENT — positioning leads, promotions sit behind it.
+     (Fixes teardown finding 10.1: the hero used to sell a giveaway.)
+     ============================================================ -->
+<div class="announce">
+  <span data-msg>UK's No.1 rated tan for <b>sensitive skin</b></span>
+  <span data-msg style="display:none">Free UK delivery on orders over <b>£45</b></span>
+  <span data-msg style="display:none">Now in <b>96 Boots stores</b> across the UK &amp; Ireland</span>
+</div>
+
+<!-- ============================================================ NAV ============================================================ -->
+<header class="nav">
+  <div class="nav__in">
+    <a class="nav__logo" href="#top" aria-label="SOLSKIN home">
+      <img src="logo/solskin-wordmark-cream.svg" alt="SOLSKIN" width="132" height="41">
+    </a>
+    <nav aria-label="Main">
+      <ul class="nav__links">
+        <li><a href="#why">Why SOLSKIN</a></li>
+        <li><a href="#proof">Real results</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#founders">Our story</a></li>
+        <li><a href="#stockists">Find us</a></li>
+      </ul>
+    </nav>
+    <div class="nav__cta">
+      <a class="btn btn--ghost" href="#quiz">Find your shade</a>
+      <a class="btn btn--primary" href="#shop">Shop</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============================================================
+     HERO — proposition-led. Person + pain + promise in six words.
+     ============================================================ -->
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div>
+      <p class="eyebrow">Vegan · Cruelty-free · Dermatologically tested · Made in Britain</p>
+      <h1>
+        <span>Tan that</span>
+        <span>likes your</span>
+        <span class="accent">skin back.</span>
+      </h1>
+      <p class="hero__sub">
+        If self-tan usually leaves your skin tight, itchy or blotchy, you've probably given up on it.
+        Fair enough. We made one for skin like yours — <strong>no streaks, no orange, no drama.</strong>
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#shop">Shop the range</a>
+        <a class="btn btn--ghost" href="#quiz">Take the 60-second shade quiz</a>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat"><b>250k+</b><span>customers glowing</span></div>
+        <div class="hero__stat"><b>4.8★</b><span>average rating</span></div>
+        <div class="hero__stat"><b>96</b><span>Boots stores</span></div>
+      </div>
+    </div>
+    <div class="hero__art">
+      <span class="hero__blob" aria-hidden="true"></span>
+      <!-- live 3D bottle; the still below is the no-WebGL fallback -->
+      <canvas class="hero__canvas" id="heroCanvas" aria-label="Rotating 3D model of the SOLSKIN Tan Mousse bottle. Drag to spin."></canvas>
+      <img class="hero__bottle" src="img/pack-mousse-hero.jpg" alt="SOLSKIN Tan Mousse in Dark, 200ml" width="470" height="497">
+      <span class="hero__hint">Drag to spin</span>
+      <span class="hero__tag"><i aria-hidden="true"></i> About £0.95 per full-body tan</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PAIN — name it in her words before selling anything.
+     ============================================================ -->
+<section class="sec sec--sand" id="pain">
+  <div class="wrap">
+    <div class="pain__lead rv">
+      <div>
+        <p class="eyebrow">The bit nobody admits</p>
+        <p class="big-quote">Three half-used bottles under the sink.</p>
+      </div>
+      <div>
+        <p class="lede">
+          You didn't stop tanning because you stopped wanting to glow. You stopped because the
+          last one stung. And the one before that went patchy round your ankles by day two.
+        </p>
+        <p style="color:var(--ink-soft)">
+          Most self-tan is formulated for skin that never reacts to anything. If yours does —
+          dry, sensitive, easily irritated — you've been buying products that were never really
+          designed with you in mind.
+        </p>
+      </div>
+    </div>
+
+    <div class="pain__grid">
+      <div class="pain__card rv"><h3>The sting</h3><p>Alcohol-heavy formulas that leave skin tight and itchy an hour after you've applied them.</p></div>
+      <div class="pain__card rv"><h3>The patchiness</h3><p>Dry areas grab colour and hold it. Knees, elbows and ankles give the whole thing away.</p></div>
+      <div class="pain__card rv"><h3>The orange</h3><p>A shade that looked fine in the bottle and nothing like skin on you.</p></div>
+      <div class="pain__card rv"><h3>The smell</h3><p>That unmistakable biscuit note, arriving about four hours in, wherever you happen to be.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SCROLL CINEMA — the Scroll World hybrid.
+     One continuous camera flight, scrubbed by scroll. Scene media
+     is swappable for generated video clips later (see js/scroll.js).
+     ============================================================ -->
+<section class="cinema" id="journey" aria-label="How the glow happens">
+  <div class="cinema__rail">
+    <div class="cinema__stage">
+
+      <a class="cinema__skip" href="#proof">Skip ↓</a>
+
+      <!-- The sequence: bottle -> drop -> skin -> proof, one unbroken
+           3D take driven entirely by scroll position. -->
+      <canvas class="cinema__stage3d" id="cinemaStage3D" aria-label="Scroll sequence: a drop falls from the SOLSKIN bottle onto a forearm and the glow spreads across the skin"></canvas>
+
+      <!-- OPTIONAL: real footage of the tan being applied and rubbed in,
+           scrubbed frame-by-frame by scroll. Put the clip at
+           video/rub.mp4 and add  data-src="video/rub.mp4"  to this element.
+           With no data-src the 3D rub plays instead — see site/README.md
+           for the shooting and encoding spec. -->
+      <video class="cinema__video" id="cinemaVideo"
+             muted playsinline preload="auto" aria-hidden="true"></video>
+
+      <!-- the take resolves into the real, unretouched photograph -->
+      <div class="cinema__final" aria-hidden="true">
+        <img src="img/proof-after-dark.jpg" alt="">
+        <span class="cinema__final-badge">No skin retouching or filters applied</span>
+      </div>
+
+      <!-- static fallback when there is no WebGL / reduced motion -->
+      <div class="cinema__still">
+        <img src="img/pack-mousse-hero.jpg" alt="SOLSKIN Tan Mousse">
+        <img src="img/skin-forearm.jpg" alt="Skin after applying SOLSKIN Tan Mousse">
+        <img src="img/proof-after-dark.jpg" alt="The finished glow, unretouched">
+      </div>
+
+      <!-- captions, keyed to scenes -->
+      <div class="cinema__cap" data-cap="bottle">
+        <h3>One pump, one mitt</h3>
+        <p>Aloe vera, papaya, ginger and hyaluronic acid. Free from parabens and sulfates.</p>
+      </div>
+      <div class="cinema__cap" data-cap="skin">
+        <h3>Six to eight hours</h3>
+        <p>It develops while you sleep. Hydrating ingredients keep the colour sitting flat, so it fades evenly instead of patchy.</p>
+      </div>
+      <div class="cinema__cap" data-cap="glow">
+        <h3>Then you just look well</h3>
+        <p>Streak-free, transfer-free, and nothing on your skin that it has to recover from.</p>
+      </div>
+
+      <div class="cinema__prog" aria-hidden="true"><i></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROOF — the real, unretouched pair. Honest labelling.
+     ============================================================ -->
+<section class="sec" id="proof">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <p class="eyebrow">Real results</p>
+      <h2>The same skin, eight hours apart</h2>
+      <p class="lede">
+        Same model, same light, same camera. We don't retouch the spots, the marks or the texture
+        out — because the point isn't perfect skin, it's your skin with a glow on it.
+      </p>
+    </div>
+
+    <div class="proof__pair">
+      <figure class="proof__fig rv">
+        <img src="img/proof-before-dark.jpg" alt="Before applying SOLSKIN Tan Mousse" loading="lazy">
+        <figcaption>Before</figcaption>
+      </figure>
+      <figure class="proof__fig proof__fig--after reveal-after">
+        <img src="img/proof-after-dark.jpg" alt="After applying SOLSKIN Tan Mousse in Dark" loading="lazy">
+        <figcaption>After · Shade Dark</figcaption>
+      </figure>
+    </div>
+
+    <p class="proof__badge rv">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      No skin retouching or filters applied
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOUNDERS — the most ownable asset, brought forward.
+     NOTE: no founder photography exists in the asset library. This
+     section is built typographically on purpose. Drop portraits of
+     Kaci and Grace in here when they're shot — see assets/ASSETS.md.
+     ============================================================ -->
+<section class="sec sec--sand" id="founders">
+  <div class="wrap founders">
+    <div class="rv">
+      <p class="eyebrow">Our story</p>
+      <h2>We didn't set out to start a brand.</h2>
+      <blockquote class="founders__quote">
+        <p class="big-quote" style="font-size:clamp(1.2rem,2.6vw,1.9rem);max-width:22ch">
+          “Self-tan wasn't made for skin like ours. We were over it.”
+        </p>
+      </blockquote>
+      <p style="color:var(--ink-soft)">
+        Kaci and Grace kept buying tan, kept reacting to it, and kept giving up. So they spent two
+        years working with formulators in Britain on one that behaved like skincare — and made it
+        for everyone else who'd quietly given up too.
+      </p>
+      <p class="founders__sign">Kaci &amp; Grace, founders</p>
+    </div>
+
+    <div class="founders__cards rv">
+      <div class="founder">
+        <b>Kaci</b>
+        <span>Co-founder</span>
+        <p>Lives with eczema. Spent years avoiding tan altogether because everything she tried left her skin angry.</p>
+      </div>
+      <div class="founder">
+        <b>Grace</b>
+        <span>Co-founder</span>
+        <p>Acne-prone skin, and the same story — patchy fades, odd textures, and formulas that clearly weren't built for her.</p>
+      </div>
+      <div class="founder" style="grid-column:1/-1;background:var(--brown);color:var(--cream);border-color:var(--brown)">
+        <b style="color:var(--cream)">This isn't about fixing anything</b>
+        <p style="color:rgba(246,240,235,.85)">
+          We're building something for real skin — dry, sensitive, acne-prone, textured, scarred,
+          freckled, melanin-rich, melanin-fair. Tanning isn't about hiding. It's about glowing your way.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ WHY IT WORKS ============================================================ -->
+<section class="sec" id="why">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <p class="eyebrow">Why it works</p>
+      <h2>We're picky about what touches your skin</h2>
+      <p class="lede">Made in the UK, dermatologically tested, and built on ingredients chosen to be gentle first and bronzing second.</p>
+    </div>
+
+    <div class="bens">
+      <div class="ben rv"><img src="icons/streak-free.svg" alt=""><b>Streak-free</b></div>
+      <div class="ben rv"><img src="icons/derma-approved.svg" alt=""><b>Derma tested</b></div>
+      <div class="ben rv"><img src="icons/mood-enhancing.svg" alt=""><b>Mood-enhancing</b></div>
+      <div class="ben rv"><img src="icons/anti-inflammatory.svg" alt=""><b>Soothing formula</b></div>
+      <div class="ben rv"><img src="icons/vegan.svg" alt=""><b>Vegan</b></div>
+      <div class="ben rv"><img src="icons/cruelty-free.svg" alt=""><b>Cruelty-free</b></div>
+    </div>
+
+    <div class="ings">
+      <div class="ing rv"><b>Aloe Vera</b><p>Soothes and hydrates. The reason the formula suits skin that usually objects.</p></div>
+      <div class="ing rv"><b>Hyaluronic Acid</b><p>Holds moisture in, so colour sits flat and fades evenly rather than in patches.</p></div>
+      <div class="ing rv"><b>Papaya Extract</b><p>Gently brightens and evens tone, with antioxidants to nourish as the tan develops.</p></div>
+      <div class="ing rv"><b>Zanthalene &amp; Ginger</b><p>A calming pairing that helps keep the formula comfortable on sensitive skin.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ SHOP ============================================================ -->
+<section class="sec sec--sand" id="shop">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <p class="eyebrow">The range</p>
+      <h2>Four products. No guesswork.</h2>
+      <p class="lede">Start gradual if you're nervous, go mousse if you want it tonight. Not sure? The shade quiz takes a minute.</p>
+    </div>
+
+    <div class="prods">
+      <article class="prod rv">
+        <div class="prod__img"><img src="img/pack-mousse.jpg" alt="SOLSKIN Tan Mousse" loading="lazy"></div>
+        <div class="prod__body">
+          <h3>Tan Mousse</h3>
+          <span class="prod__shade">Dark · Very Dark · 200ml</span>
+          <p class="prod__desc">Your fast-pass to a deep bronze in one application. Develops in 6–8 hours.</p>
+          <div class="prod__foot"><span class="prod__price">£21.99</span><a class="btn btn--primary" href="#shop">Add to bag</a></div>
+        </div>
+      </article>
+
+      <article class="prod rv">
+        <div class="prod__img"><img src="img/pack-gradual.jpg" alt="SOLSKIN Gradual Tanning Moisturiser" loading="lazy"></div>
+        <div class="prod__body">
+          <h3>Gradual Tan</h3>
+          <span class="prod__shade">Light–Medium · Medium–Dark · 200ml</span>
+          <p class="prod__desc">Build it slowly, day by day. The safest place to start if tan has burned you before.</p>
+          <div class="prod__foot"><span class="prod__price">£14.99</span><a class="btn btn--primary" href="#shop">Add to bag</a></div>
+        </div>
+      </article>
+
+      <article class="prod rv">
+        <div class="prod__img"><img src="img/pack-drops.jpg" alt="SOLSKIN Tan Drops" loading="lazy"></div>
+        <div class="prod__body">
+          <h3>Tan Drops</h3>
+          <span class="prod__shade">Customisable · 25ml</span>
+          <p class="prod__desc">Mix into your own moisturiser and control exactly how deep it goes.</p>
+          <div class="prod__foot"><span class="prod__price">£20.99</span><a class="btn btn--primary" href="#shop">Add to bag</a></div>
+        </div>
+      </article>
+
+      <article class="prod rv">
+        <div class="prod__img"><img src="img/pack-shimmer.jpg" alt="SOLSKIN Shimmer Body Instant Glow" loading="lazy"></div>
+        <div class="prod__body">
+          <h3>Body Shimmer</h3>
+          <span class="prod__shade">Instant · Washes off · 100ml</span>
+          <p class="prod__desc">For tonight. A wash-off glow that layers over your tan or stands on its own.</p>
+          <div class="prod__foot"><span class="prod__price">£16.47</span><a class="btn btn--primary" href="#shop">Add to bag</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ COMPARISON + STATS + PRESS ============================================================ -->
+<section class="sec sec--espresso" id="compare">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <p class="eyebrow">The honest comparison</p>
+      <h2>What makes us different</h2>
+    </div>
+
+    <div class="cmp rv">
+      <table>
+        <thead><tr><th scope="col">Feature</th><th scope="col">SOLSKIN</th><th scope="col">Most tans</th></tr></thead>
+        <tbody>
+          <tr><td>Formulated with sensitive skin in mind</td><td><span class="yes">✓</span></td><td><span class="no">—</span></td></tr>
+          <tr><td>Looks natural, never fake</td><td><span class="yes">✓</span></td><td><span class="no">—</span></td></tr>
+          <tr><td>Hydrates like skincare</td><td><span class="yes">✓</span></td><td><span class="no">—</span></td></tr>
+          <tr><td>Dermatologically tested</td><td><span class="yes">✓</span></td><td><span class="no">—</span></td></tr>
+          <tr><td>Buildable, even, customisable</td><td><span class="yes">✓</span></td><td><span class="no">—</span></td></tr>
+          <tr><td>No biscuit smell</td><td><span class="yes">✓</span></td><td><span class="no">—</span></td></tr>
+          <tr><td>Transfer-free</td><td><span class="yes">✓</span></td><td><span class="no">—</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="stats">
+      <div class="stat rv"><b>250k+</b><span>customers glowing year-round</span></div>
+      <div class="stat rv"><b>97.2%</b><span>say they'd never go back to drying, streaky tans</span></div>
+      <div class="stat rv"><b>4.8★</b><span>average across the range</span></div>
+      <div class="stat rv"><b>30 days</b><span>money-back guarantee, no debate</span></div>
+    </div>
+
+    <div class="press rv">
+      <img src="img/independent.png" alt="The Independent" loading="lazy">
+      <img src="img/sheerluxe.png" alt="SheerLuxe" loading="lazy">
+      <img src="img/popsugar.png" alt="PopSugar" loading="lazy">
+      <img src="img/ok.png" alt="OK! Magazine" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STOCKISTS + SUBSCRIBE — both were buried on the live site.
+     ============================================================ -->
+<section class="sec" id="stockists">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <p class="eyebrow">Two things worth knowing</p>
+      <h2>Find us, or never run out</h2>
+    </div>
+    <div class="duo">
+      <div class="duo__card rv">
+        <h3>Now in 96 Boots stores</h3>
+        <p style="color:var(--ink-soft)">
+          Across the UK and Ireland. Want to see the shade in person before you commit?
+          Check which stores stock us before you travel.
+        </p>
+        <a class="btn btn--ghost" href="#stockists">Find your nearest Boots</a>
+      </div>
+      <div class="duo__card duo__card--fill rv">
+        <h3>Subscribe &amp; save 10%</h3>
+        <p>
+          A 200ml bottle is about 25 full-body applications. Set the rhythm that suits you,
+          save 10% on every delivery, and skip or cancel whenever you like.
+        </p>
+        <a class="btn btn--light" href="#shop">Set up a subscription</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ COMMUNITY ============================================================ -->
+<section class="sec sec--sand" id="community">
+  <div class="wrap wrap--wide">
+    <div class="sec__head rv">
+      <p class="eyebrow">The SOLSQUAD</p>
+      <h2>Real skin, real glow</h2>
+      <p class="lede">Dry, sensitive, acne-prone, textured, scarred, freckled, melanin-rich, melanin-fair — and everything in between.</p>
+    </div>
+    <div class="comm">
+      <figure class="rv"><img src="img/community-01.jpg" alt="SOLSKIN community member" loading="lazy"><figcaption>@kaci.jay</figcaption></figure>
+      <figure class="rv"><img src="img/community-02.jpg" alt="SOLSKIN community member" loading="lazy"><figcaption>@kikisophiax</figcaption></figure>
+      <figure class="rv"><img src="img/community-03.jpg" alt="SOLSKIN community member" loading="lazy"><figcaption>@keirabrookewhitehead</figcaption></figure>
+      <figure class="rv"><img src="img/community-04.jpg" alt="SOLSKIN community member" loading="lazy"><figcaption>@kyramaeturner</figcaption></figure>
+      <figure class="rv"><img src="img/community-05.jpg" alt="SOLSKIN community member" loading="lazy"><figcaption>@jessicarosegale</figcaption></figure>
+      <figure class="rv"><img src="img/community-06.jpg" alt="SOLSKIN community member" loading="lazy"><figcaption>@courtneyjones02</figcaption></figure>
+      <figure class="rv"><img src="img/community-07.jpg" alt="SOLSKIN community member" loading="lazy"><figcaption>@sophiecracknell</figcaption></figure>
+      <figure class="rv"><img src="img/community-08.jpg" alt="SOLSKIN community member" loading="lazy"><figcaption>@tennesseethresh</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ QUIZ ============================================================ -->
+<section class="sec" id="quiz">
+  <div class="wrap">
+    <div class="quiz rv">
+      <p class="eyebrow">60 seconds, no email required</p>
+      <h2>Not sure which one is you?</h2>
+      <p class="lede">Tell us how your skin behaves and how deep you want to go. We'll point you at one product — not the whole shelf.</p>
+      <div class="quiz__chips">
+        <span class="quiz__chip">Sensitive</span>
+        <span class="quiz__chip">Dry</span>
+        <span class="quiz__chip">Acne-prone</span>
+        <span class="quiz__chip">Fair</span>
+        <span class="quiz__chip">Olive</span>
+        <span class="quiz__chip">Deep</span>
+        <span class="quiz__chip">First-timer</span>
+      </div>
+      <a class="btn btn--primary" href="#quiz">Start the shade quiz</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ FAQ ============================================================ -->
+<section class="sec sec--sand">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <p class="eyebrow">Before you ask</p>
+      <h2>The honest answers</h2>
+    </div>
+    <div class="faq rv">
+      <details open>
+        <summary>My skin reacts to everything. Will this be different?</summary>
+        <p>Our formulas are dermatologically tested, made without parabens or sulfates, and built around soothing ingredients like aloe vera and hyaluronic acid. That's why people with sensitive and reactive skin get on with them. We'd always suggest patch-testing first, and if it isn't right for you, the 30-day money-back guarantee covers it.</p>
+      </details>
+      <details>
+        <summary>Will I go orange?</summary>
+        <p>The shades are built to read as skin, not as tan. If you're nervous, start with the Gradual Tanning Moisturiser — you build the depth over a few days and stop wherever you like.</p>
+      </details>
+      <details>
+        <summary>I'm rubbish at applying it. Will it go streaky?</summary>
+        <p>Exfoliate first, moisturise the dry bits — elbows, knees, ankles — then apply with a mitt or brush in circular motions. That's most of it. The formula is fast-drying and transfer-free, so it won't end up on your sheets.</p>
+      </details>
+      <details>
+        <summary>How long does a bottle last?</summary>
+        <p>A 200ml bottle gives roughly 25 full-body applications — about £0.95 a tan.</p>
+      </details>
+      <details>
+        <summary>When will it arrive?</summary>
+        <p>Standard delivery is 2–4 business days, express is 1–2 (order Monday to Friday before 3pm). Free UK delivery over £45. You'll get tracking by email once it ships.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================ FOOTER ============================================================ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__logo"><img src="logo/solskin-wordmark-cream.svg" alt="SOLSKIN" width="520" height="160"></div>
+    <div class="foot__cols">
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#shop">Tan Mousse</a></li>
+          <li><a href="#shop">Gradual Tanning Moisturiser</a></li>
+          <li><a href="#shop">Tan Drops</a></li>
+          <li><a href="#shop">Body Shimmer</a></li>
+          <li><a href="#shop">Mitts &amp; brushes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#quiz">Shade quiz</a></li>
+          <li><a href="#stockists">Boots stockists</a></li>
+          <li><a href="#">Delivery &amp; returns</a></li>
+          <li><a href="#">Money-back guarantee</a></li>
+          <li><a href="mailto:hello@solskin.com">hello@solskin.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="#founders">Our story</a></li>
+          <li><a href="#why">Ingredients</a></li>
+          <li><a href="#community">The SOLSQUAD</a></li>
+          <li><a href="#">Sol Society rewards</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__base">
+      <span>© 2026 Solskin Group Limited · 14766564 · Made in Britain</span>
+      <span class="foot__paywrap"><img class="foot__pay" src="img/payment-methods.png" alt="Visa, Mastercard, Amex, PayPal, Google Pay, Apple Pay, Klarna" loading="lazy"></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/three.min.js?v=1787995096446"></script>
+<!-- scene3d defines window.SOLSKIN3D; cinema3d extends it. Order matters. -->
+<script src="js/scene3d.js?v=1787995096446"></script>
+<script src="js/cinema3d.js?v=1787995096446"></script>
+<script src="js/scroll.js?v=1787995096446"></script>
+</body>
+</html>

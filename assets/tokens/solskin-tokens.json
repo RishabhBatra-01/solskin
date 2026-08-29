@@ -1,0 +1,34 @@
+{
+  "$comment": "SOLSKIN design tokens, read from the live site 2026-08-29 and de-duplicated. Mirrors solskin-tokens.css.",
+  "color": {
+    "cream":     { "value": "#F6F0EB", "role": "page canvas", "note": "site also uses #F4F0EB — duplicate, drop" },
+    "sand":      { "value": "#EDD8C5", "role": "alternate band, footer" },
+    "brown":     { "value": "#885946", "role": "brand colour: text, logo, primary CTA", "note": "widgets use #805B4A — retheme to this" },
+    "brownDeep": { "value": "#6B4436", "role": "hover / pressed", "note": "derived, not on the live site" },
+    "espresso":  { "value": "#32201A", "role": "announcement bar, dark bands" },
+    "white":     { "value": "#FFFFFF", "role": "button text, studio backdrop only" },
+    "rose":      { "value": "#C4A0A0", "role": "press / editorial cards", "confidence": "approximate — sampled from screenshot, confirm" },
+    "yes":       { "value": "#5C6B4E", "role": "comparison tick", "note": "site uses generic green — off-palette" },
+    "no":        { "value": "#A65A4C", "role": "comparison cross", "note": "site uses #be2119 red — off-palette" }
+  },
+  "font": {
+    "display": { "family": "Vanguard CF", "weight": 700, "case": "uppercase", "minSize": "20px",
+                 "note": "single weight only; the strongest brand asset on the site" },
+    "body":    { "family": "DM Sans", "weights": [400, 500, 700], "variable": "300-900" },
+    "script":  { "family": "Caveat", "usage": "lifestyle graphic accents only, never body" },
+    "remove":  ["Bebas Neue", "Open Sans", "Poppins"]
+  },
+  "scale": {
+    "display": { "size": 60, "lineHeight": 72 },
+    "h1": { "size": 40, "lineHeight": 48 },
+    "h2": { "size": 32, "lineHeight": 40 },
+    "h3": { "size": 24, "lineHeight": 32 },
+    "h4": { "size": 18, "lineHeight": 24 },
+    "body": { "size": 16, "lineHeight": 24 },
+    "small": { "size": 14, "lineHeight": 20 },
+    "tiny": { "size": 12, "lineHeight": 16 }
+  },
+  "radius": { "pill": 999, "card": 28, "thumb": 16, "chip": 12 },
+  "shadow": { "default": "0 2px 8px rgba(55,63,71,.08), 0 1px 2px rgba(55,63,71,.12)" },
+  "space":  { "base": 4, "steps": [4, 8, 12, 16, 20, 24, 32, 40] }
+}

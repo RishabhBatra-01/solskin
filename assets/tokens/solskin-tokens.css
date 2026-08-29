@@ -1,0 +1,69 @@
+/* SOLSKIN design tokens
+ * Values read from the live site's computed CSS on 29 Aug 2026, then de-duplicated.
+ * Where the live site carries two near-identical values, the canonical one is chosen
+ * here and the discarded duplicate is noted. Use this file as the single source of truth.
+ */
+:root{
+  /* ---- Colour: the palette is the product's own shade ladder ---- */
+  --sol-cream:     #F6F0EB;  /* page canvas — "untanned"      (site also uses #F4F0EB; drop it) */
+  --sol-sand:      #EDD8C5;  /* bands, footer — "gradual"                                        */
+  --sol-brown:     #885946;  /* THE brand colour — text, logo, primary CTA
+                                (widgets use #805B4A; retheme them to this)                     */
+  --sol-brown-deep:#6B4436;  /* derived: hover / pressed state                                   */
+  --sol-espresso:  #32201A;  /* announcement bar, dark bands — "very dark"                       */
+  --sol-white:     #FFFFFF;  /* button text and studio backdrops only                            */
+  --sol-rose:      #C4A0A0;  /* press/editorial cards — APPROXIMATE, sampled from screenshot     */
+
+  /* Semantic — currently off-palette on the live site (generic red/green).
+     Rebalanced here toward the warm neutrals. */
+  --sol-yes:       #5C6B4E;
+  --sol-no:        #A65A4C;
+
+  /* ---- Type ---- */
+  --sol-font-display: "Vanguard CF", "Bebas Neue", "Arial Narrow", sans-serif; /* ALL CAPS ONLY, never < 20px */
+  --sol-font-body:    "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sol-font-script:  "Caveat", cursive;  /* accents on lifestyle graphics only, never body */
+
+  --sol-size-display: 60px;  --sol-lh-display: 72px;
+  --sol-size-h1:      40px;  --sol-lh-h1:      48px;
+  --sol-size-h2:      32px;  --sol-lh-h2:      40px;
+  --sol-size-h3:      24px;  --sol-lh-h3:      32px;
+  --sol-size-h4:      18px;  --sol-lh-h4:      24px;
+  --sol-size-body:    16px;  --sol-lh-body:    24px;
+  --sol-size-small:   14px;  --sol-lh-small:   20px;
+  --sol-size-tiny:    12px;  --sol-lh-tiny:    16px;
+
+  /* ---- Shape: nothing in this brand has a sharp corner ---- */
+  --sol-radius-pill:  999px;  /* every button */
+  --sol-radius-card:  28px;   /* site uses 24 and 32; 28 is the midpoint — pick one */
+  --sol-radius-thumb: 16px;
+  --sol-radius-chip:  12px;
+
+  /* ---- Elevation: minimal. Depth comes from colour bands, not shadow ---- */
+  --sol-shadow: 0 2px 8px rgba(55,63,71,.08), 0 1px 2px rgba(55,63,71,.12);
+
+  /* ---- Spacing: 4px base ---- */
+  --sol-space-1: 4px;  --sol-space-2: 8px;  --sol-space-3: 12px; --sol-space-4: 16px;
+  --sol-space-5: 20px; --sol-space-6: 24px; --sol-space-8: 32px; --sol-space-10: 40px;
+}
+
+/* Reference implementation of the two button styles observed on the site */
+.sol-btn{
+  font-family:var(--sol-font-body); font-weight:500; font-size:18px;
+  border-radius:var(--sol-radius-pill); padding:14px 32px; border:1px solid transparent;
+  cursor:pointer; transition:background-color .18s ease, color .18s ease;
+}
+.sol-btn--primary{ background:var(--sol-brown); color:var(--sol-white); border-color:var(--sol-brown); }
+.sol-btn--primary:hover{ background:var(--sol-white); color:var(--sol-brown); }
+.sol-btn--secondary{ background:var(--sol-espresso); color:var(--sol-white); }
+.sol-btn--secondary:hover{ background:var(--sol-white); color:var(--sol-espresso); }
+
+/* Self-host the display face. Licence check required before shipping — see ASSETS.md. */
+@font-face{
+  font-family:"Vanguard CF"; src:url("../fonts/VanguardCF-Bold.woff") format("woff");
+  font-weight:700; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"DM Sans"; src:url("../fonts/DMSans-Variable.woff2") format("woff2-variations");
+  font-weight:300 900; font-style:normal; font-display:swap;
+}
