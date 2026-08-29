@@ -8,11 +8,10 @@ picker. Rather than send samples from someone else's brand, I built them for you
 https://solskin.vercel.app/picker.html
 https://solskin.vercel.app/shop.html
 
-Real catalogue, real prices. While I was in there I found your Gradual Tan listed
-twice at the same £32.38 under two different discounts, which is half the reason the
-picker exists.
+Real catalogue, real prices — including the Gradual Tan that's listed twice at two
+different discounts. That's most of why the picker exists.
 
 Short version of me: developer, I build products end to end.
 Portfolio: rishabhkbatra.is-a.dev
 
-Worth a chat?
+Anything you'd change?
